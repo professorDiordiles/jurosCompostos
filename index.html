@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina inicial</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #eaf0f8;
+            margin: 0px;
+            padding: 30px;
+        }
+        h1{
+            color: blue;
+            font-size: 25px;
+            text-align: center;
+        }
+        .calculadora{
+            background-color: white;
+            width: 350px;
+            max-width: 100%;
+            margin: 30px auto;
+            padding: 25px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .calculadora div{
+            margin-bottom: 15px;
+        }
+        label{
+            display: block;
+            margin-bottom: 5px;
+        }
+        input{
+            width: 100%;
+            padding: 8px;
+           box-sizing: border-box;
+        }
+        button{
+            width: 49%;
+            padding:12px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #calcular{
+            background-color: blue;
+        }
+        #limpar{
+            background-color: green;
+        }
+
+
+       #calcular:hover{
+            background-color: darkblue;
+        }
+         #limpar:hover{
+            background-color: darkgreen;
+        }
+        #resultado{
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+  <div class="calculadora">
+
+     <h1>Calculadora de juros compostos</h1>
+
+  <div>
+  <label for="capital">Capital inicial R$:</label>
+  <input type="number" id="capital">
+  </div>
+
+<div>
+  <label for="juros"> Taxa de juros:</label>
+  <input type="number" id="juros">
+</div>
+
+
+<div>
+  <label for="meses">Tempo:</label>
+  <input type="number" id="meses">
+</div>
+
+<div class botoes>
+
+  <button id="calcular">Calcular</button>
+  <button id="limpar">Limpar</button>
+
+  <h2>Resultado</h2>
+  <p>Montante final R$:
+    <span id="resultado">0,00</span>
+  </p>
+  </div>
+
+  <script>
+    document.getElementById("calcular").addEventListener("click", function() {
+
+    // Capturar os valores dos campos
+    let capital = Number(document.getElementById("capital").value);
+    let juros = Number(document.getElementById("juros").value);
+    let meses = Number(document.getElementById("meses").value);
+
+    // Começar com o capital inicial
+    let valor = capital;
+
+    // Calcular os juros compostos mês a mês
+    for (let i = 0; i < meses; i++) {
+        valor = valor + (valor * juros / 100);
+    }
+
+    // Mostrar o resultado final
+    document.getElementById("resultado").textContent =
+        valor.toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
+});
+
+document.getElementById("limpar").addEventListener("click", function() {
+
+    document.getElementById("capital").value = "";
+    document.getElementById("juros").value = "";
+    document.getElementById("meses").value = "";
+
+    document.getElementById("resultado").textContent = "0,00";
+
+});
+  </script>
+</body>
+</html>
